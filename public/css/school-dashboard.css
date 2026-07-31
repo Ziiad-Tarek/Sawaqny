@@ -1,0 +1,187 @@
+.bg-primary { background-color: #0E216C; }
+.text-primary { color: #0E216C; }
+.border-primary { border-color: #0E216C; }
+.bg-accent { background-color: #FE8511; }
+.text-accent { color: #FE8511; }
+.hover\:bg-accent:hover { background-color: #e0740e; }
+
+/* ==========================================
+    تعديل ألوان الكارت ليصبح أزرق والكلام أبيض (.glass-card)
+========================================== */
+.glass-card {
+    background: rgba(14, 33, 108, 0.92) !important; /* لون أزرق كحلي شفيف */
+    backdrop-filter: blur(10px);
+    color: #FFFFFF !important; /* لون النص الافتراضي داخل الكارت أبيض */
+}
+
+/* إجبار كل العناوين والنصوص والوصف داخل الكارت أن تكون باللون الأبيض */
+.glass-card h1,
+.glass-card h2,
+.glass-card h3,
+.glass-card h4,
+.glass-card h5,
+.glass-card h6,
+.glass-card .title-text,
+.glass-card p,
+.glass-card span:not(.text-accent),
+.glass-card label,
+.glass-card .subtitle-text {
+    color: #FFFFFF !important;
+}
+
+/* تعديل الـ Placeholders داخل الحقول لتكون واضحة */
+.glass-card input::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    transition: transform 0.2s ease;
+}
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ==========================================
+    General Setup & Colors
+========================================== */
+:root {
+    --primary-navy: #0E216C;
+    --accent-orange: #FE8511;
+    --neutral-grey: #838C91;
+    --bg-light: #F4F6FA;
+    --white: #FFFFFF;
+}
+
+* {
+    font-family: 'Cairo', sans-serif !important;
+}
+
+/* Custom Tailwind Helper Override */
+.bg-primary {
+    background-color: var(--primary-navy) !important;
+}
+
+.bg-accent {
+    background-color: var(--accent-orange) !important;
+}
+
+.text-primary {
+    color: var(--primary-navy) !important;
+}
+
+.text-accent {
+    color: var(--accent-orange) !important;
+}
+
+/* ==========================================
+    Square Logo Style (اللوجو المربع)
+========================================== */
+.logo-box {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 8px;
+    border: 2px solid rgba(254, 133, 17, 0.3);
+    width: 75px;
+    height: 75px;
+}
+
+.logo-img-square {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* ==========================================
+    Floating AI Chatbot Button
+========================================== */
+.ai-chatbot-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #0e216c, #1a3abb);
+    color: #ffffff !important;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(14, 33, 108, 0.4);
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: pulse-glow 2.5s infinite;
+}
+
+.ai-chatbot-btn .chatbot-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai-chatbot-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(26, 58, 187, 0.5);
+    background: linear-gradient(135deg, #1a3abb, #0e216c);
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(26, 58, 187, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(26, 58, 187, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(26, 58, 187, 0); }
+}
+
+/* ==========================================
+    Forgot Password Modal
+========================================== */
+.forgot-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.forgot-modal-card {
+    background: var(--white);
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 24px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: modalSlide 0.3s ease-out;
+}
+
+@keyframes modalSlide {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--neutral-grey);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal-btn:hover {
+    color: #000;
+}

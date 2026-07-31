@@ -1,0 +1,2071 @@
+/* ==========================================
+   1. VARIABLES & GLOBAL STYLES
+========================================== */
+:root {
+    --primary-color: #0E216C;
+    --accent-color: #FE8511;
+    --bg-light: #f7f9fc;
+    --text-color: #222;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg-light);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+/* ==========================================
+   2. HEADER & NAVIGATION BAR
+========================================== */
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    background: white;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* تنسيق شريط الملاحة والهيدر */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    background-color: #ffffff; /* أو لون خلفية الهيدر لديكِ */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* تنسيق حاوي اللوجو */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* ضبط حجم وتناسب صورة اللوجو */
+.logo-img {
+    height: 50px;           /* تحديد الارتفاع المناسب للهيدر[cite: 1] */
+    width: auto;           /* تحديد العرض المناسب لمنع التمدد المبالغ فيه */
+    object-fit: contain;    /* يضمن ظهور اللوجو كاملاً داخل المساحة[cite: 1] */
+    border-radius: 8px;     /* حواف دائرية خفيفة (اختياري)[cite: 1] */
+    transition: transform 0.3s ease;
+}
+
+/* تأثير عند تحريك الماوس فوق اللوجو */
+.logo-img:hover {
+    transform: scale(1.03);
+}
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 18px;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-color);
+    background-color: rgba(254, 133, 17, 0.08);
+}
+
+.signup {
+    background: var(--accent-color);
+    color: white !important;
+    padding: 8px 18px !important;
+    border-radius: 30px !important;
+    cursor: pointer;
+}
+
+.signup:hover {
+    background: #e0730d !important;
+}
+
+/* ✅ تم إضافة النقطة (.) وتأمين الضغط بـ pointer-events */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 33, 108, 0.65);
+    pointer-events: none; /* 💡 يمنع الـ overlay إنه يحجب الكليكات عن باقي العناصر */
+    z-index: 1;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: #e0730d;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    list-style: none;
+    padding: 8px 0;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.dropdown-menu li a:hover {
+    background: #235baf;
+    color: var(--accent-color);
+}
+
+/* ==========================================
+   3. HERO SECTIONS (Home & Showrooms)
+========================================== */
+.hero {
+    height: 90vh;
+    background-image: url("https://images.unsplash.com/photo-1503376780353-7e6692767b70");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero.showrooms-hero {
+    height: 60vh;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 33, 108, 0.65);
+}
+
+.hero-content {
+    width: 90%;
+    max-width: 1200px;
+    position: relative;
+    z-index: 5;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 40px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 19px;
+    margin-bottom: 35px;
+}
+
+/* ==========================================
+   4. SEARCH BOXES
+========================================== */
+.search-section {
+    width: 90%;
+    margin: 50px auto;
+}
+
+.search-box {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    align-items: end;
+}
+
+.search-section .search-box {
+    background: white;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.input-box label {
+    margin-bottom: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.search-section .input-box label {
+    color: var(--primary-color);
+}
+
+.input-box select {
+    height: 48px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 0 12px;
+    font-size: 15px;
+    outline: none;
+    background: #fff;
+    color: #333;
+}
+
+.gps button {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 10px;
+    background: #00BCD4;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.search-btn {
+    height: 48px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent-color);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+    background: #e0730d;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   5. CARDS & GRID LAYOUTS
+========================================== */
+.features, .showrooms, .content-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto;
+}
+
+.features-container, .cards, .packages-grid, .schools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card, .feature-card, .package-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transition: 0.4s;
+}
+
+.card:hover, .feature-card:hover {
+    transform: translateY(-8px);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.card i, .feature-card i {
+    font-size: 40px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.details-btn {
+    width: 100%;
+    margin-top: 15px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.details-btn:hover {
+    background: var(--accent-color);
+}
+
+/* ==========================================
+   6. LOGIN PAGE STYLES
+========================================== */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(14, 33, 108, 0.08);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+}
+
+.btn-login {
+    height: 50px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background: #e0730d;
+}
+
+/* ==========================================
+   7. POPUP & FOOTER
+========================================== */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background: white;
+    width: 400px;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+}
+
+#close {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+footer {
+    background: var(--primary-color);
+    color: white;
+    margin-top: 80px;
+    padding: 50px 10%;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.footer-container a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 8px 0;
+}
+
+footer hr {
+    margin: 30px 0;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.copyright {
+    text-align: center;
+}
+
+
+/* Responsive */
+@media(max-width: 992px) {
+    .search-box, .cards, .features-container, .packages-grid, .footer-container {
+        grid-template-columns: 1fr;
+    }
+    .nav-links {
+        display: none;
+    }
+}
+.maintenance-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-header h1 {
+    color: #1d3557;
+    margin-bottom: 8px;
+}
+
+.section-header p {
+    color: #6c757d;
+}
+
+.filter-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 180px;
+}
+
+.filter-group input, .filter-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.btn-search {
+    background-color: #1d3557;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-search:hover {
+    background-color: #457b9d;
+}
+
+.centers-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.center-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-right: 5px solid #1d3557;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #e63946;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.center-info h2 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #2b2d42;
+}
+
+.center-meta {
+    color: #6c757d;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.rating {
+    margin-bottom: 12px;
+}
+
+.stars {
+    color: #ffb703;
+}
+
+.rating-text {
+    font-size: 13px;
+    color: #4a5568;
+}
+
+.services-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.services-tags span {
+    background-color: #f1f3f5;
+    color: #495057;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.btn-details {
+    background-color: transparent;
+    border: 1px solid #1d3557;
+    color: #1d3557;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-details:hover {
+    background-color: #1d3557;
+    color: white;
+}
+
+.contact-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #dee2e6;
+}
+
+.hidden {
+    display: none;
+}
+
+.btn-map {
+    display: inline-block;
+    margin-top: 8px;
+    background-color: #2a9d8f;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* ===========================
+   Login Page Specific Styling
+=========================== */
+/* ==========================================
+   1. تعديل لون البار العلوي (Navbar) للأزرق الكحلي
+========================================== */
+header, .navbar {
+    background-color: #0E216C !important; /* الأزرق الكحلي للهوية */
+    position: relative;
+    z-index: 1000;
+}
+
+/* تغيير لون النصوص والروابط داخل البار للأبيض */
+.navbar .nav-links a,
+.navbar .account-btn,
+.navbar .signup,
+.navbar .dropdown-container a {
+    color: #ffffff !important;
+}
+
+/* لون الرابط النشط بالبرتقالي */
+.navbar .nav-links a.active {
+    color: #FE8511 !important;
+}
+
+/* ==========================================
+   2. تصحيح مكان ونزول الكارد للسنتر
+========================================== */
+.login-page-wrapper {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px; /* مسافة أمان لمنع التداخل مع البار */
+    background-color: #f4f6f9;
+}
+
+.login-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(14, 33, 108, 0.1);
+    margin: 40px auto 20px auto; /* ينزل الكارد لتحت وميكونش لازق في البار */
+}
+/* ==========================================
+   تصحيح تنسيق العناصر داخل كارد تسجيل الدخول
+========================================== */
+
+/* 1. ضبط النموذج كاملاً ليكبر بعرض الكارد */
+.login-form {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+}
+
+/* 2. جعل الـ Label فوق والـ Input تحته بعرض كامل */
+.input-group {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    text-align: right !important;
+}
+
+.input-group label {
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    color: #0E216C !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+/* 3. تعديل حقول الإدخال لتأخذ العرض الكامل وشكل مريح */
+.input-group input {
+    width: 100% !important;
+    height: 48px !important;
+    padding: 0 15px !important;
+    border: 1.5px solid #d1d5db !important;
+    border-radius: 10px !important;
+    font-size: 0.95rem !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+}
+
+.input-group input:focus {
+    border-color: #FE8511 !important;
+}
+
+/* 4. ضبط السطر الخاص بـ (تذكرني / نسيت كلمة المرور) */
+.form-options {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 0.85rem !important;
+    margin-top: 5px !important;
+}
+
+/* 5. زر تسجيل الدخول يملأ العرض */
+.btn-login {
+    width: 100% !important;
+    height: 48px !important;
+    background-color: #FE8511 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+}
+/* ==========================================
+   تنسيق قسم الباقات الاحترافي الجذاب
+========================================== */
+
+/* 1. شبكة عرض الباقات */
+.packages-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: 30px !important;
+    align-items: center !important;
+    margin-top: 40px !important;
+}
+
+/* 2. تصميم كارد الباقة الأساسي */
+.package-card {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 35px 25px !important;
+    text-align: center !important;
+    box-shadow: 0 10px 25px rgba(14, 33, 108, 0.07) !important;
+    border: 2px solid #eef2f7 !important;
+    position: relative !important;
+    transition: all 0.4s ease !important;
+}
+
+.package-card:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 15px 35px rgba(14, 33, 108, 0.15) !important;
+}
+
+/* 3. مميزات الباقة الأكثر مبيعاً (Featured) */
+.package-card.featured {
+    border: 2.5px solid #FE8511 !important;
+    background: linear-gradient(180deg, #ffffff 0%, #fffdfa 100%) !important;
+    transform: scale(1.04) !important;
+    box-shadow: 0 12px 30px rgba(254, 133, 17, 0.18) !important;
+}
+
+.package-card.featured:hover {
+    transform: scale(1.04) translateY(-10px) !important;
+    box-shadow: 0 18px 40px rgba(254, 133, 17, 0.28) !important;
+}
+
+/* 4. شارة / وسام الأكثر مبيعاً */
+.badge-hot {
+    position: absolute !important;
+    top: -15px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: linear-gradient(135deg, #FE8511, #e0730d) !important;
+    color: #ffffff !important;
+    padding: 6px 18px !important;
+    border-radius: 20px !important;
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 4px 12px rgba(254, 133, 17, 0.4) !important;
+}
+
+/* 5. عناوين وأسعار الباقات */
+.package-card h3 {
+    color: #0E216C !important;
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 12px !important;
+}
+
+.package-card .price {
+    font-size: 2.2rem !important;
+    font-weight: 800 !important;
+    color: #FE8511 !important;
+    margin: 15px 0 25px 0 !important;
+    display: block !important;
+}
+
+/* 6. قائمة الميزات داخل الباقة */
+.package-card ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: right !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.package-card ul li {
+    font-size: 0.95rem !important;
+    color: #4a5568 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    line-height: 1.5 !important;
+}
+
+/* أيقونة الصح أمام كل ميزة */
+.package-card ul li i {
+    color: #10B981 !important; /* لون أخضر جذاب للمميزات */
+    font-size: 1.05rem !important;
+    background: rgba(16, 185, 129, 0.1) !important;
+    padding: 5px !important;
+    border-radius: 50% !important;
+    width: 24px !important;
+    height: 24px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* زر حجز أو إختيار الباقة */
+.package-card .btn-package {
+    margin-top: 25px !important;
+    width: 100% !important;
+    height: 48px !important;
+    background-color: #0E216C !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-weight: bold !important;
+    font-size: 1rem !important;
+    cursor: pointer !important;
+    transition: 0.3s ease !important;
+}
+
+.package-card.featured .btn-package {
+    background-color: #FE8511 !important;
+}
+
+.package-card .btn-package:hover {
+    background-color: #e0730d !important;
+    transform: scale(1.02) !important;
+}
+/* ==========================================
+   1. تصغير الفوتر وجعله متناسق ومدمج
+========================================== */
+footer {
+    background: var(--primary-color) !important; /* الكحلي الأساسي */
+    color: white !important;
+    margin-top: 50px !important; /* تقليل المسافة العلوية */
+    padding: 30px 8% 15px 8% !important; /* تقليل الحشو الداخلي جداً */
+}
+
+.footer-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important; /* تقليل الفجوات بين الأعمدة */
+    align-items: start !important;
+}
+
+.footer-container h3 {
+    font-size: 1.1rem !important;
+    color: #ffffff !important;
+    margin-bottom: 10px !important;
+    border-bottom: 2px solid var(--accent-color) !important;
+    display: inline-block !important;
+    padding-bottom: 4px !important;
+}
+
+.footer-container p,
+.footer-container a {
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
+    margin: 4px 0 !important;
+    color: #e2e8f0 !important;
+}
+
+.footer-container a:hover {
+    color: var(--accent-color) !important;
+}
+
+footer hr {
+    margin: 15px 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.footer-bottom {
+    padding: 0 !important;
+}
+
+
+/* ==========================================
+   2. لمسات احترافية لتنسيق الصفحة وإبراز الألوان
+========================================== */
+
+/* ألوان العناوين الرئيسية بالموقع */
+.features h2,
+.content-section .section-header h2 {
+    color: var(--primary-color) !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    position: relative !important;
+    display: inline-block !important;
+    margin-bottom: 10px !important;
+}
+
+/* خط برتقالي مميز تحت العناوين */
+.section-header h2::after,
+.features h2::after {
+    content: '' !important;
+    display: block !important;
+    width: 50% !important;
+    height: 4px !important;
+    background: var(--accent-color) !important;
+    margin: 8px auto 0 auto !important;
+    border-radius: 10px !important;
+}
+
+.section-header {
+    text-align: center !important;
+    margin-bottom: 35px !important;
+}
+
+/* تحسين كروت المميزات لتكون جذابة */
+.feature-card {
+    background: #ffffff !important;
+    border: 1px solid #eef2f7 !important;
+    border-top: 4px solid var(--primary-color) !important;
+    border-radius: 16px !important;
+    padding: 25px 20px !important;
+    box-shadow: 0 8px 20px rgba(14, 33, 108, 0.04) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) !important;
+    border-top-color: var(--accent-color) !important;
+    box-shadow: 0 12px 28px rgba(254, 133, 17, 0.15) !important;
+}
+
+.feature-card i {
+    font-size: 2.2rem !important;
+    color: var(--accent-color) !important;
+    background: rgba(254, 133, 17, 0.1) !important;
+    width: 60px !important;
+    height: 60px !important;
+    line-height: 60px !important;
+    border-radius: 50% !important;
+    margin-bottom: 15px !important;
+}
+
+.feature-card h3 {
+    color: var(--primary-color) !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+}
+
+.feature-card p {
+    color: #64748b !important;
+    font-size: 0.9rem !important;
+}
+
+/* تحسين كروت المدارس (Schools) */
+.school-card {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    padding: 25px !important;
+    box-shadow: 0 6px 18px rgba(14, 33, 108, 0.05) !important;
+    transition: 0.3s ease !important;
+}
+
+.school-card:hover {
+    border-color: var(--primary-color) !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 12px 25px rgba(14, 33, 108, 0.12) !important;
+}
+
+.school-card i {
+    font-size: 2.5rem !important;
+    color: var(--primary-color) !important;
+}
+
+.school-card h3 {
+    color: var(--primary-color) !important;
+    margin: 12px 0 6px 0 !important;
+}
+
+.school-card p {
+    color: #64748b !important;
+    font-size: 0.9rem !important;
+}
+
+/* تحسين شكل صندوق البحث في الهيرو (Hero Search Box) */
+.hero .search-box {
+    background: rgba(255, 255, 255, 0.22) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+    border-radius: 20px !important;
+}
+
+.hero .search-btn {
+    background: linear-gradient(135deg, #FE8511, #e0730d) !important;
+    box-shadow: 0 6px 18px rgba(254, 133, 17, 0.35) !important;
+}
+
+.hero .search-btn:hover {
+    box-shadow: 0 8px 22px rgba(254, 133, 17, 0.5) !important;
+}
+/* ==========================================
+  /* ==========================================
+   تنسيق الـ Smart Popup العصرية
+========================================== */
+.popup {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(14, 33, 108, 0.5) !important;
+    backdrop-filter: blur(8px) !important; /* تأثير ضبابي عصري */
+    z-index: 2000 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 20px !important;
+}
+
+.popup-content {
+    background: #ffffff !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    padding: 32px 28px !important;
+    border-radius: 24px !important;
+    position: relative !important;
+    box-shadow: 0 25px 50px -12px rgba(14, 33, 108, 0.25) !important;
+    animation: smartPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+@keyframes smartPop {
+    from { opacity: 0; transform: scale(0.85) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.close-btn {
+    position: absolute !important;
+    top: 18px !important;
+    left: 20px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: #f1f5f9 !important;
+    border: none !important;
+    font-size: 1.4rem !important;
+    color: #64748b !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: 0.2s ease !important;
+}
+
+.close-btn:hover {
+    background: #fee2e2 !important;
+    color: #ef4444 !important;
+    transform: rotate(90deg) !important;
+}
+
+.badge-showroom {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background: rgba(254, 133, 17, 0.12) !important;
+    color: #FE8511 !important;
+    padding: 4px 12px !important;
+    border-radius: 20px !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+}
+
+.popup-header h2 {
+    color: #0E216C !important;
+    font-size: 1.6rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 20px !important;
+}
+
+/* شبكة عرض المعلومات */
+.popup-info-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    background: #f8fafc !important;
+    padding: 16px !important;
+    border-radius: 16px !important;
+    border: 1px solid #e2e8f0 !important;
+    margin-bottom: 22px !important;
+}
+
+.info-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+
+.icon-box {
+    width: 40px !important;
+    height: 40px !important;
+    background: #ffffff !important;
+    color: #0E216C !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.1rem !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03) !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.info-item small {
+    display: block !important;
+    color: #94a3b8 !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+}
+
+.info-item p {
+    color: #1e293b !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+/* نموذج الاستفسار السريع */
+.popup-form h4 {
+    color: #0E216C !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.popup-form h4 i {
+    color: #FE8511 !important;
+}
+
+.form-group {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin-bottom: 14px !important;
+}
+
+.form-group input {
+    width: 100% !important;
+    padding: 10px 14px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.88rem !important;
+    outline: none !important;
+    transition: 0.2s ease !important;
+}
+
+.form-group input:focus {
+    border-color: #FE8511 !important;
+    box-shadow: 0 0 0 3px rgba(254, 133, 17, 0.15) !important;
+}
+
+.contact-btn {
+    width: 100% !important;
+    height: 46px !important;
+    background: linear-gradient(135deg, #FE8511, #e0730d) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    box-shadow: 0 6px 18px rgba(254, 133, 17, 0.3) !important;
+    transition: 0.3s ease !important;
+}
+
+.contact-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 22px rgba(254, 133, 17, 0.45) !important;
+}
+.maintenance-container {
+    max-width: 1100px !important;
+    margin: -30px auto 60px auto !important;
+    padding: 0 20px !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+
+/* 1. قسم كروت العروض الخاصة (كباتن / متدربين / مدارس) */
+.offers-section {
+    margin-bottom: 40px !important;
+}
+
+.offers-title {
+    text-align: center !important;
+    color: #0E216C !important;
+    font-size: 1.6rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 25px !important;
+}
+
+.offers-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.offer-card {
+    background: #ffffff !important;
+    border-radius: 18px !important;
+    padding: 22px !important;
+    border: 1px solid #eef2f7 !important;
+    box-shadow: 0 8px 20px rgba(14, 33, 108, 0.06) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.offer-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 12px 28px rgba(14, 33, 108, 0.12) !important;
+}
+
+/* تمييز نوع الفئة بألوان وشارات */
+.offer-card.trainee { border-top: 4px solid #10B981 !important; }
+.offer-card.captain { border-top: 4px solid #FE8511 !important; }
+.offer-card.school { border-top: 4px solid #0E216C !important; }
+
+.offer-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+}
+
+.offer-header i {
+    font-size: 1.5rem !important;
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.offer-card.trainee .offer-header i { background: rgba(16, 185, 129, 0.1) !important; color: #10B981 !important; }
+.offer-card.captain .offer-header i { background: rgba(254, 133, 17, 0.1) !important; color: #FE8511 !important; }
+.offer-card.school .offer-header i { background: rgba(14, 33, 108, 0.1) !important; color: #0E216C !important; }
+
+.offer-header h3 {
+    color: #0E216C !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+.offer-tag {
+    display: inline-block !important;
+    background: #FE8511 !important;
+    color: #ffffff !important;
+    font-size: 0.8rem !important;
+    font-weight: 800 !important;
+    padding: 4px 10px !important;
+    border-radius: 8px !important;
+    margin-bottom: 10px !important;
+    width: fit-content !important;
+}
+
+.offer-card p {
+    color: #475569 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 15px !important;
+}
+
+/* 2. فلتر البحث الذكي */
+.filter-card {
+    background: #ffffff !important;
+    padding: 25px !important;
+    border-radius: 20px !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto !important;
+    gap: 18px !important;
+    align-items: end !important;
+    box-shadow: 0 10px 30px rgba(14, 33, 108, 0.08) !important;
+    border: 1px solid #eef2f7 !important;
+    margin-bottom: 35px !important;
+}
+
+.filter-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.filter-group label {
+    font-weight: 700 !important;
+    color: #0E216C !important;
+    font-size: 0.9rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.filter-group label i { color: #FE8511 !important; }
+
+.filter-group input,
+.filter-group select {
+    width: 100% !important;
+    padding: 12px 14px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.9rem !important;
+    outline: none !important;
+    background-color: #f8fafc !important;
+    transition: 0.25s ease !important;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    border-color: #FE8511 !important;
+    background-color: #ffffff !important;
+}
+
+.btn-search {
+    height: 48px !important;
+    background: linear-gradient(135deg, #FE8511, #e0730d) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 0 25px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    box-shadow: 0 4px 12px rgba(254, 133, 17, 0.3) !important;
+    transition: 0.3s ease !important;
+}
+
+.btn-search:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(254, 133, 17, 0.45) !important;
+}
+/* ==========================================
+   تنسيقات صفحة الصيانة وعروض الفئات (Maintenance Page)
+========================================== */
+
+/* 1. إصلاح الهيرو (Hero Section) لمنع التداخل */
+.hero.showrooms-hero {
+    position: relative !important;
+    min-height: 280px !important;
+    padding: 80px 20px 60px 20px !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, rgba(14, 33, 108, 0.88), rgba(10, 22, 75, 0.95));
+    background-image: url('"https://images.unsplash.com/photo-1503376780353-7e6692767b70"')  !important;
+}
+
+
+.hero.showrooms-hero h1 {
+    color: #ffffff !important;
+    font-size: 2.2rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 10px !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+.hero.showrooms-hero p {
+    color: #f1f5f9 !important;
+    font-size: 1.05rem !important;
+    max-width: 700px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* 2. الحاوية الرئيسية لصفحة الصيانة */
+.maintenance-container {
+    max-width: 1100px !important;
+    margin: 40px auto 60px auto !important;
+    padding: 0 20px !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* 3. قسم عروض الصيانة الحصرية (الكباتن، المتدربين، المدارس) */
+.offers-section {
+    margin-bottom: 45px !important;
+}
+
+.offers-title {
+    text-align: center !important;
+    color: #0E216C !important;
+    font-size: 1.8rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 30px !important;
+    position: relative !important;
+    display: block !important;
+}
+
+.offers-title::after {
+    content: '' !important;
+    display: block !important;
+    width: 60px !important;
+    height: 4px !important;
+    background: #FE8511 !important;
+    margin: 8px auto 0 auto !important;
+    border-radius: 10px !important;
+}
+
+.offers-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 25px !important;
+}
+
+.offer-card {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 25px 22px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 10px 25px rgba(14, 33, 108, 0.05) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.offer-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 15px 30px rgba(14, 33, 108, 0.12) !important;
+}
+
+/* تمييز الحدود العلوية لكل فئة */
+.offer-card.trainee { border-top: 5px solid #10B981 !important; }
+.offer-card.captain { border-top: 5px solid #FE8511 !important; }
+.offer-card.school { border-top: 5px solid #0E216C !important; }
+
+.offer-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+}
+
+.offer-header i {
+    font-size: 1.4rem !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.offer-card.trainee .offer-header i { background: rgba(16, 185, 129, 0.1) !important; color: #10B981 !important; }
+.offer-card.captain .offer-header i { background: rgba(254, 133, 17, 0.1) !important; color: #FE8511 !important; }
+.offer-card.school .offer-header i { background: rgba(14, 33, 108, 0.1) !important; color: #0E216C !important; }
+
+.offer-header h3 {
+    color: #0E216C !important;
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    margin: 0 !important;
+}
+
+.offer-tag {
+    display: inline-block !important;
+    background: linear-gradient(135deg, #FE8511, #e0730d) !important;
+    color: #ffffff !important;
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    padding: 4px 12px !important;
+    border-radius: 8px !important;
+    margin-bottom: 12px !important;
+    width: fit-content !important;
+    box-shadow: 0 4px 10px rgba(254, 133, 17, 0.2) !important;
+}
+
+.offer-card p {
+    color: #475569 !important;
+    font-size: 0.92rem !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+
+/* 4. فلتر البحث الذكي */
+.filter-card {
+    background: #ffffff !important;
+    padding: 25px !important;
+    border-radius: 20px !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto !important;
+    gap: 18px !important;
+    align-items: end !important;
+    box-shadow: 0 10px 30px rgba(14, 33, 108, 0.08) !important;
+    border: 1px solid #eef2f7 !important;
+    margin-bottom: 35px !important;
+}
+
+.filter-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.filter-group label {
+    font-weight: 700 !important;
+    color: #0E216C !important;
+    font-size: 0.9rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.filter-group label i { color: #FE8511 !important; }
+
+.filter-group input,
+.filter-group select {
+    width: 100% !important;
+    padding: 12px 14px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 10px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.9rem !important;
+    outline: none !important;
+    background-color: #f8fafc !important;
+    transition: 0.25s ease !important;
+    box-sizing: border-box !important;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    border-color: #FE8511 !important;
+    background-color: #ffffff !important;
+}
+
+.btn-search {
+    height: 48px !important;
+    background: linear-gradient(135deg, #FE8511, #e0730d) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 0 25px !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    box-shadow: 0 4px 12px rgba(254, 133, 17, 0.3) !important;
+    transition: 0.3s ease !important;
+}
+
+.btn-search:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(254, 133, 17, 0.45) !important;
+}
+
+/* 5. كروت مراكز الصيانة (Centers List) */
+.centers-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+
+.center-card {
+    background: #ffffff !important;
+    border-radius: 18px !important;
+    padding: 25px !important;
+    position: relative !important;
+    box-shadow: 0 8px 22px rgba(14, 33, 108, 0.06) !important;
+    border: 1px solid #eef2f7 !important;
+    border-right: 6px solid #0E216C !important;
+    transition: 0.3s ease !important;
+}
+
+.center-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 28px rgba(14, 33, 108, 0.12) !important;
+}
+
+.discount-badge {
+    position: absolute !important;
+    top: 20px !important;
+    left: 20px !important;
+    background: linear-gradient(135deg, #FE8511, #e0730d) !important;
+    color: #ffffff !important;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    box-shadow: 0 4px 10px rgba(254, 133, 17, 0.25) !important;
+}
+
+.center-info h2 {
+    color: #0E216C !important;
+    font-size: 1.35rem !important;
+    font-weight: 800 !important;
+    margin: 0 0 8px 0 !important;
+}
+
+.center-meta {
+    color: #64748b !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 12px !important;
+}
+
+.rating {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 15px !important;
+}
+
+.stars { color: #f59e0b !important; }
+
+.rating-text {
+    font-size: 0.85rem !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+}
+
+.services-tags {
+    display: flex !important;
+    gap: 10px !important;
+    margin-bottom: 18px !important;
+    flex-wrap: wrap !important;
+}
+
+.services-tags span {
+    background-color: #f1f5f9 !important;
+    color: #0E216C !important;
+    padding: 6px 14px !important;
+    border-radius: 8px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.btn-details {
+    background: transparent !important;
+    border: 2px solid #0E216C !important;
+    color: #0E216C !important;
+    padding: 9px 18px !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    transition: 0.3s ease !important;
+}
+
+.btn-details:hover {
+    background: #0E216C !important;
+    color: #ffffff !important;
+}
+
+.contact-details {
+    margin-top: 18px !important;
+    padding-top: 18px !important;
+    border-top: 1.5px dashed #e2e8f0 !important;
+}
+
+.contact-details p {
+    margin: 6px 0 !important;
+    color: #334155 !important;
+    font-size: 0.92rem !important;
+}
+
+.btn-map {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin-top: 10px !important;
+    background-color: #10B981 !important;
+    color: #ffffff !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    transition: 0.25s ease !important;
+}
+
+.btn-map:hover {
+    background-color: #059669 !important;
+}
+/* إصلاح خلفية الهيرو لصفحة الصيانة */
+    /* خلفية صورة السيارات مع التدرج الكحلي شفاف */
+/* إصلاح خلفية الهيرو لصفحة الصيانة */
+/* 1. كود الهيرو لصفحة الصيانة مطابق للمعارض 100% */
+.hero.maintenance-hero {
+    height: 100vh !important;
+    background-image: url("https://images.unsplash.com/photo-1503376780353-7e6692767b70") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 0 !important; /* إلغاء أي بادينج كان عامل اختلاف */
+}
+
+/* 2. التأكد من أن الـ overlay يغطي الهيرو بالكامل بنفس درجة الشفافية */
+.hero.maintenance-hero .overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(14, 33, 108, 0.65) !important;
+    z-index: 1 !important;
+}
+
+/* 3. جعل محتوى النصوص فوق الـ overlay */
+.hero.maintenance-hero .hero-content {
+    position: relative !important;
+    z-index: 5 !important;
+}
+/* ==========================================
+   تنسيق زرار المساعد الذكي (AI Chatbot Floating Button)
+========================================== */
+.ai-chatbot-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* ليكون في الزاوية اليسرى من الأسفل متناسباً مع الاتجاه العربي RTL */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #0e216c, #1a3abb);
+    color: #ffffff !important;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(14, 33, 108, 0.4);
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ai-chatbot-btn .chatbot-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* تأثير الحركة عند مرور الماوس عليه */
+.ai-chatbot-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(26, 58, 187, 0.5);
+    background: linear-gradient(135deg, #1a3abb, #0e216c);
+}
+
+/* تأثير النبض الخفيف للفت الانتباه */
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(26, 58, 187, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(26, 58, 187, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(26, 58, 187, 0); }
+}
+
+.ai-chatbot-btn {
+    animation: pulse-glow 2.5s infinite;
+}
+/* ==========================================
+   تنسيقات صفحة تسجيل الدخول (Login Page)
+========================================== */
+.login-page-wrapper {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f4f6fa 0%, #e2e8f0 100%);
+}
+
+.login-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(14, 33, 108, 0.08);
+    border: 1px solid #e2e8f0;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login-logo-img {
+    height: 60px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+}
+
+.login-header h2 {
+    color: #0e216c;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.login-header p {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.login-form .input-group {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.login-form label i {
+    color: #0e216c;
+    margin-left: 5px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.login-form input:focus {
+    border-color: #0e216c;
+    box-shadow: 0 0 0 3px rgba(14, 33, 108, 0.1);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.88rem;
+}
+
+.remember-me {
+    color: #475569;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.forgot-pass {
+    color: #0e216c;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.forgot-pass:hover {
+    color: #1a3abb;
+    text-decoration: underline;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #0e216c, #1a3abb);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(14, 33, 108, 0.3);
+}
+
+.register-redirect {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.register-redirect a {
+    color: #0e216c;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.register-redirect a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   تنسيقات نافذة (Modal) نسيت كلمة المرور
+========================================== */
+.forgot-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    display: none; /* مخفية افتراضياً */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.forgot-modal-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 16px;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #94a3b8;
+    cursor: pointer;
+}
+
+.close-modal-btn:hover {
+    color: #1e293b;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-icon {
+    font-size: 2.2rem;
+    color: #0e216c;
+    margin-bottom: 10px;
+}
+
+.modal-header h3 {
+    color: #0e216c;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.modal-header p {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.forgot-success-msg {
+    display: none;
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+}

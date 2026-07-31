@@ -1,0 +1,956 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #F4F6F9;
+    color: #1A202C;
+    direction: rtl;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.auth-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #0E216C 0%, #1a328f 100%);
+}
+
+.auth-container {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-align: right;
+}
+
+.auth-container.wide {
+    max-width: 750px;
+    width: 95%;
+    margin: 2rem auto;
+    overflow: hidden;
+}
+
+.auth-container h2 {
+    color: #0E216C;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.auth-container .subtitle {
+    color: #4A5568;
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+}
+
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #1A202C;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem 1rem;
+    border: 1px solid #DCDFE6;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    background-color: #FAFAFA;
+    color: #1A202C;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    border-color: #FE8511;
+    background-color: #FFF;
+}
+
+.form-group input[type="file"] {
+    padding: 0.4rem 0.6rem;
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+.form-group input[type="file"]::file-selector-button {
+    background-color: #0E216C;
+    color: #FFF;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
+    transition: background 0.3s;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+    background-color: #FE8511;
+}
+
+.otp-inputs {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.otp-input {
+    width: 50px;
+    height: 55px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid #DCDFE6;
+    border-radius: 8px;
+    color: #1A202C;
+}
+
+.otp-input:focus {
+    border-color: #FE8511;
+    outline: none;
+}
+
+.page-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #0E216C;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 0.6rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-header a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header a:hover {
+    transform: scale(1.05);
+}
+
+.logo-img {
+    display: block;
+    margin: 0 auto;
+    height: 50px;
+    max-width: 130px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background-color: #FFFFFF;
+    padding: 4px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nav-item {
+    color: #DCDFE6;
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-icon {
+    width: 20px;
+    text-align: center;
+    color: #FE8511;
+}
+
+.nav-item:hover .nav-icon, .nav-item.active .nav-icon {
+    color: #FFF;
+}
+
+.nav-item:hover, .nav-item.active {
+    background-color: #FE8511;
+    color: #FFF;
+}
+
+.logout-item {
+    margin-top: auto;
+    color: #FF6B6B;
+}
+
+.logout-item .nav-icon {
+    color: #FF6B6B;
+}
+
+.logout-item:hover {
+    background-color: rgba(231, 76, 60, 0.15);
+    color: #FF6B6B;
+}
+
+.logout-item:hover .nav-icon {
+    color: #FF6B6B;
+}
+
+.main-content {
+    margin-right: 260px;
+    flex: 1;
+    padding: 2rem;
+}
+
+.content-header {
+    margin-bottom: 2rem;
+    text-align: right;
+}
+
+.page-title {
+    color: #0E216C;
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+}
+
+.otp-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    margin-bottom: 2rem;
+}
+
+.card-title {
+    color: #0E216C;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: #FFFFFF;
+    border: 1px solid #E9ECEF;
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: right;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #0E216C;
+    margin-top: 0.5rem;
+}
+
+.booking-card {
+    background: #FFFFFF;
+    border: 1px solid #E9ECEF;
+    border-right: 5px solid #FE8511;
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* تنسيق زر التأكيد */
+.btn-primary.otp-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin-top: 1.5rem;
+}
+
+/* تنسيق خانات الرمز لتنسيق الكتابة فيها */
+.otp-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    direction: ltr; /* لجعل الخانات مرتبة من اليسار لليمين أثناء كتابة الأرقام */
+}
+
+.otp-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.otp-input:focus {
+    border-color: #2563eb; /* لون الإطار عند الوقوف على الخانة */
+}
+
+.btn-success {
+    background-color: #137333;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #D93025;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.action-btns {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.badge-pending { background-color: #FFF4E5; color: #B45309; }
+.badge-success { background-color: #E6F4EA; color: #137333; }
+.badge-info { background-color: #E8F0FE; color: #1A73E8; }
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    text-align: right;
+}
+
+.data-table th, .data-table td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #E9ECEF;
+}
+
+.data-table th {
+    background-color: #F8F9FA;
+    color: #0E216C;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .page-wrapper { flex-direction: column; }
+    .sidebar { width: 100%; position: relative; }
+    .main-content { margin-right: 0; padding: 1rem; }
+}
+/* ==========================================
+   General Styles & Variables
+========================================== */
+:root {
+    --primary-navy: #0E216C;
+    --accent-orange: #FE8511;
+    --neutral-grey: #838C91;
+    --bg-light: #F4F6FA;
+    --white: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-navy) 0%, #050C28 100%);
+    padding: 20px;
+    position: relative;
+}
+
+/* ==========================================
+   Auth Container Card
+========================================== */
+.auth-container {
+    background: var(--white);
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.logo-link {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+/* اللوجو المربع بحواف ناعمة */
+
+.auth-container h2 {
+    color: var(--primary-navy);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: var(--neutral-grey);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+/* ==========================================
+   Form Fields
+========================================== */
+.form-group {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.form-group label i {
+    color: var(--primary-navy);
+    margin-left: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-navy);
+    box-shadow: 0 0 0 4px rgba(14, 33, 108, 0.12);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.88rem;
+}
+
+.remember-me {
+    color: var(--neutral-grey);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.forgot-pass {
+    color: var(--accent-orange);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s;
+}
+
+.forgot-pass:hover {
+    color: #e07208;
+    text-decoration: underline;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--accent-orange), #e07208);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(254, 133, 17, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(254, 133, 17, 0.5);
+}
+
+/* ==========================================
+   Floating AI Chatbot Button
+========================================== */
+
+/* ==========================================
+   Modal نسيت كلمة المرور
+========================================== */
+.forgot-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.forgot-modal-card {
+    background: var(--white);
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    animation: modalSlide 0.3s ease-out;
+}
+
+@keyframes modalSlide {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--neutral-grey);
+    cursor: pointer;
+}
+
+.close-modal-btn:hover {
+    color: #000;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-icon {
+    font-size: 2.2rem;
+    color: var(--accent-orange);
+    margin-bottom: 10px;
+}
+
+.modal-header h3 {
+    color: var(--primary-navy);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.modal-header p {
+    color: var(--neutral-grey);
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.forgot-success-msg {
+    display: none;
+    background: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 15px;
+}
+.btn-primary {
+    text-decoration: none;
+}
+/* تنسيقات الأزرار والتنقل */
+.btn-next {
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin-top: 1.5rem;
+    background-color: #0E216C !important;
+    transition: background-color 0.3s ease;
+}
+
+.btn-next:hover {
+    background-color: #091648 !important;
+}
+
+/* قائمة الباقات والجداول */
+.packages-list,
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* شبكة نموذج إدخال المواعيد */
+.schedule-grid-form {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1.5fr auto;
+    gap: 0.75rem;
+    align-items: end;
+}
+
+.schedule-grid-form .grid-item {
+    margin: 0;
+}
+
+.btn-add-slot {
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    white-space: nowrap;
+}
+
+/* تجاوب الشبكة مع الموبايل */
+@media (max-width: 600px) {
+    .schedule-grid-form {
+        grid-template-columns: 1fr;
+    }
+    .btn-add-slot {
+        width: 100%;
+    }
+}
+/* تنبيه التكرار الأسبوعي */
+.repeat-note {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* تنسيق كروت المواعيد المضافة */
+.schedule-list {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+
+.slot-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.slot-day {
+    font-weight: bold;
+    color: #0E216C;
+}
+
+.slot-time {
+    color: #475569;
+    font-size: 0.95rem;
+}
+
+.weekly-badge {
+    background-color: #dcfce7;
+    color: #15803d;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.delete-slot-btn {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.delete-slot-btn:hover {
+    color: #b91c1c;
+}
+
+.empty-msg {
+    color: #94a3b8;
+    text-align: center;
+    font-size: 0.9rem;
+}
+/* تنسيق رسالة نجاح الحفظ */
+.success-alert {
+    background-color: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.ai-chatbot-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* ليكون في الزاوية اليسرى من الأسفل متناسباً مع الاتجاه العربي RTL */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #0e216c, #1a3abb);
+    color: #ffffff !important;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(14, 33, 108, 0.4);
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ai-chatbot-btn .chatbot-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* تأثير الحركة عند مرور الماوس عليه */
+.ai-chatbot-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(26, 58, 187, 0.5);
+    background: linear-gradient(135deg, #1a3abb, #0e216c);
+}
+.ai-chatbot-btn {
+    animation: pulse-glow 2.5s infinite;
+}
+
+/* تحسين كروت البيانات وتفاعلها */
+.booking-card, .otp-card, .stat-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.booking-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* بطاقات متابعة المتدربين (captain_students) */
+.student-progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.student-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FE8511, #137333);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+/* بطاقات الأرباح والمالية (captain_finance) */
+.stat-card {
+    border-radius: 12px;
+    padding: 1.25rem;
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.stat-card:hover {
+    border-color: #FE8511;
+    transform: translateY(-3px);
+}
+
+.stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+/* الأزرار التفاعلية (Smart Actions) */
+.btn-primary, .btn-danger, .btn-success {
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background-color: #dc2626;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+}
+
+/* الشارات التفاعلية الذكية (Badges) */
+.badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.badge-success { background-color: #dcfce7; color: #15803d; }
+.badge-info { background-color: #e0f2fe; color: #0369a1; }
+.badge-pending { background-color: #fef3c7; color: #b45309; }
+
+/* جداول البيانات الذكية */
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.data-table th {
+    background-color: #f8fafc;
+    color: #0E216C;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: right;
+}
+
+.data-table td {
+    padding: 12px 16px;
+    border-top: 1px solid #e2e8f0;
+    color: #334155;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f1f5f9;
+}
